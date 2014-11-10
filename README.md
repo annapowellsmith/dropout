@@ -4,29 +4,32 @@ Dropouts is a script that automatically finds the most significant dimensions th
 
 To run Dropouts, you need to do the following:
 
-- Install and configure [gapy](https://pypi.python.org/pypi/gapy). To run Dropouts, you'll need to know where gapy's storage.db file is located.
 - Set up [goals](https://support.google.com/analytics/answer/1032415?hl=en-GB) on your Google Analytics account for the outcomes you care about.
 - Create a row in `goals.csv` for each goal you want to analyse.
 
 Your goals.csv file should contain the following columns:
 
 - service_name: The name of your goal (this can be anything you want)
-- service_id: Your Google Analytics ID.
+- service_id: Your Google Analytics ID. Go to Google Analytics, select your property and click Admin. In the third column ("View") there's a link to "View Settings'. In there you'll see a "View ID". This is the number you want.
 - goal_id: The ID of your goal.
 - goal_has_funnel: TRUE if your goal has a funnel (specified start and end page), FALSE if it does not.
 
 ### Run the script
 
-Install the requirements (you may want to do this inside a virtualenv):
+Install the requirements as follows:
 
-`pip install -r requirements.txt`
+    virtualenv ve
+    source ve/bin/activate
+    pip install -r requirements.txt
 
-Run as follows:
+Make sure you have downloaded a `client_secrets.json` file as specified by [gapy](https://github.com/alphagov/gapy).
 
-`python dropout.py -f [GOALS_FILE] -s [PATH_TO_STORAGE_DB]`
+Then run the file:
+
+    python dropout.py -f [GOALS_FILE] -s [PATH_TO_CLIENT_SECRETS]
 
 - `-f` is your goals file
-- `-s` is the path to `storage.db`.
+- `-s` is the path to the `client_secrets.json` file that you downloaded when setting up gapy.
 
 ### Running tests
 
